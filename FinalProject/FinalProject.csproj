@@ -15,4 +15,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinalProject.Core\FinalProject.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\Images\" />
+  </ItemGroup>
+
 </Project>
