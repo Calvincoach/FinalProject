@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using FinalProject.Infrastructure.Data.Confguration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Infrastructure.Data
@@ -16,6 +17,8 @@ namespace FinalProject.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
+
             builder.Entity<UserEvent>()
                 .HasKey(x => new { x.UserId, x.EventId });
 
@@ -31,6 +34,11 @@ namespace FinalProject.Infrastructure.Data
                 .Property(u => u.Email)
                 .HasMaxLength(60)
                 .IsRequired();
+
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new EventConfiguration());
+            builder.ApplyConfiguration(new VenueConfiguration());
 
             base.OnModelCreating(builder);
         } 

@@ -35,9 +35,9 @@ namespace FinalProject.Infrastructure.Data
         [StringLength(5000)]
         public string Description { get; set; } = null!;
 
-        public int Likes { get; set; } = 0;
+        public int Likes { get; set; }
 
-        public int Interested { get; set; } = 0;
+        public int Interested { get; set; }
 
         public int? CategoryId { get; set; }
 
@@ -49,6 +49,6 @@ namespace FinalProject.Infrastructure.Data
         [ForeignKey(nameof(VenueId))]
         public Venue Venue { get; set; } = null!;
 
-        public List<UserEvent> UserEvents { get; set; } = new List<UserEvent>();
+        public List<UserEvent> UserEvents { get; set; } = new List<UserEvent>();    
     }
 }
