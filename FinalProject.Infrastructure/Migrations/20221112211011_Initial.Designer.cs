@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221109194713_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221112211011_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,28 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Music"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Theatre"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Movie"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Charity"
+                        });
                 });
 
             modelBuilder.Entity("FinalProject.Infrastructure.Data.Event", b =>
@@ -94,6 +116,64 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasIndex("VenueId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("edf1c1cc-7fc6-46e4-ab75-c1498dbf7f59"),
+                            CategoryId = 1,
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(267),
+                            Description = "Sunami EP promo live, be there. ",
+                            EventOrganiser = "REAL BAY SH*T",
+                            ImageUrl = "https://f4.bcbits.com/img/a0705911045_10.jpg",
+                            Interested = 0,
+                            Likes = 0,
+                            Name = "Sunami Live Concert",
+                            Price = 20m,
+                            VenueId = new Guid("b83b35c8-1c9d-4404-a7c9-a76cc9617719")
+                        },
+                        new
+                        {
+                            Id = new Guid("86daddbb-db78-4535-a1db-e2c41b504161"),
+                            CategoryId = 2,
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(318),
+                            Description = "The puppets show is in town, bring your kids for a fun spectacle.",
+                            EventOrganiser = "Sofia Theatre",
+                            ImageUrl = "http://theatre.art.bg/img/photos/BIG14008272141zabokyt%20(1).jpg",
+                            Interested = 0,
+                            Likes = 0,
+                            Name = "The frog king",
+                            Price = 10m,
+                            VenueId = new Guid("4611cec5-9233-4c0c-9201-529b9af6235d")
+                        },
+                        new
+                        {
+                            Id = new Guid("a56797ac-08ad-441d-af7b-b12881ee5b18"),
+                            CategoryId = 3,
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(324),
+                            Description = "The premiere of the new Batman coming to this fall.",
+                            EventOrganiser = "Matt Reeves",
+                            ImageUrl = "https://m.media-amazon.com/images/M/MV5BMDdmMTBiNTYtMDIzNi00NGVlLWIzMDYtZTk3MTQ3NGQxZGEwXkEyXkFqcGdeQXVyMzMwOTU5MDk@._V1_.jpg",
+                            Interested = 0,
+                            Likes = 0,
+                            Name = "The Batman (2022) Premiere",
+                            Price = 12m,
+                            VenueId = new Guid("b80248ba-4607-498e-bbd5-afd4f7221979")
+                        },
+                        new
+                        {
+                            Id = new Guid("500c92e0-4910-4ad1-a0f8-42abe7168adc"),
+                            CategoryId = 4,
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(329),
+                            Description = "This is a charity even for the Make-a-wish foundation hosted by JPMorgan.",
+                            EventOrganiser = "JPMorgan",
+                            ImageUrl = "https://mma.prnewswire.com/media/444000/Make_A_Wish_Logo.jpg?p=twitter",
+                            Interested = 0,
+                            Likes = 0,
+                            Name = "Charity",
+                            Price = 0m,
+                            VenueId = new Guid("197ee165-a4da-46d7-893a-f1cefc6ddc96")
+                        });
                 });
 
             modelBuilder.Entity("FinalProject.Infrastructure.Data.Ticket", b =>
@@ -186,6 +266,72 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9544756e-d3c1-4965-bf8d-8eb7ecaabf9c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "86816d81-3c04-401a-9250-29f5efe292f5",
+                            Email = "guest1@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST1@GMAIL.COM",
+                            NormalizedUserName = "guest1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFmbmtJbEVVJls42YEIli+m8GMX+bIz11ygx2QITkAl07dp9gt5UGB7X6Ly0lT30Yw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e892746f-7e3e-4e6b-93ad-f3608b22a72f",
+                            TwoFactorEnabled = false,
+                            UserName = "guest1"
+                        },
+                        new
+                        {
+                            Id = "ebc5234d-a9cb-4ce0-9b9e-590b2e66d374",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5eef8efd-1120-4509-baad-bd7adba82b32",
+                            Email = "guest2@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST2@GMAIL.COM",
+                            NormalizedUserName = "guest2",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKXNWFQI1XHXYjEuAJwjD+fhkB9zBLgOf1ajLbrl2R55YVtrbuuLuEgtS+TIVmocDA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2f9cf94e-d0a0-4f0d-99cd-9d76f04f0ffb",
+                            TwoFactorEnabled = false,
+                            UserName = "guest2"
+                        },
+                        new
+                        {
+                            Id = "88fad1b1-c2c5-4e2b-ba98-16c87d7d01ca",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "38af127b-8da6-43d4-955c-91689c55be6d",
+                            Email = "guest3@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST3@GMAIL.COM",
+                            NormalizedUserName = "guest3",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDFZXF/KFNLxoHUdVM0K4LaHwXOrV1rni68092GxA7MqobinRtVMJQu5flH8PVxqCA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "cf8e79df-8a34-4ebb-aa10-82bd25bd31e6",
+                            TwoFactorEnabled = false,
+                            UserName = "guest3"
+                        },
+                        new
+                        {
+                            Id = "d58dadb8-e031-41e7-875e-da7378709cb5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "59710ab7-e448-41a4-b5da-bba744a884b4",
+                            Email = "admin1@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN1@GMAIL.COM",
+                            NormalizedUserName = "admin1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOhA1DCuR1OnDTXUchj2aETm17998fzHe34Ga9jcMOt6mWrFbDfYRverC4Y2AOiMuQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c10efa23-f0ef-43bf-978a-d604914e7d55",
+                            TwoFactorEnabled = false,
+                            UserName = "admin1"
+                        });
                 });
 
             modelBuilder.Entity("FinalProject.Infrastructure.Data.UserEvent", b =>
@@ -224,10 +370,17 @@ namespace FinalProject.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(85)
                         .HasColumnType("nvarchar(85)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -237,6 +390,40 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Venues");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b83b35c8-1c9d-4404-a7c9-a76cc9617719"),
+                            Capacity = 200,
+                            City = "Varna",
+                            ImageUrl = "",
+                            Name = "Hale3"
+                        },
+                        new
+                        {
+                            Id = new Guid("4611cec5-9233-4c0c-9201-529b9af6235d"),
+                            Capacity = 500,
+                            City = "Sofia",
+                            ImageUrl = "",
+                            Name = "Sofia Puppet Theatre"
+                        },
+                        new
+                        {
+                            Id = new Guid("b80248ba-4607-498e-bbd5-afd4f7221979"),
+                            Capacity = 1500,
+                            City = "Plovdiv",
+                            ImageUrl = "",
+                            Name = "CinemaCity"
+                        },
+                        new
+                        {
+                            Id = new Guid("197ee165-a4da-46d7-893a-f1cefc6ddc96"),
+                            Capacity = 5000,
+                            City = "Burgas",
+                            ImageUrl = "",
+                            Name = "Culture Home Burgas"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

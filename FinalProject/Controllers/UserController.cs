@@ -2,21 +2,22 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using FinalProject.Models;
 
 namespace FinalProject.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserManager<User> userManager;
+        private readonly UserManager<User> _userManager;
 
-        private readonly SignInManager<User> signInManager;
+        private readonly SignInManager<User> _signInManager;
 
         public UserController(
-            UserManager<User> _userManager,
-            SignInManager<User> _signInManager)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
-            userManager = _userManager;
-            signInManager = _signInManager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -25,7 +26,7 @@ namespace FinalProject.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "Event");
+                return RedirectToAction("Index", "Home");
             }
 
             var model = new RegisterViewModel();
@@ -48,7 +49,7 @@ namespace FinalProject.Controllers
                 UserName = model.UserName
             };
 
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
@@ -69,7 +70,7 @@ namespace FinalProject.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "Event");
+                return RedirectToAction("Index", "Home");
             }
 
             var model = new LoginViewModel();
@@ -86,15 +87,15 @@ namespace FinalProject.Controllers
                 return View(model);
             }
 
-            var user = await userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByNameAsync(model.UserName);
 
             if (user != null)
             {
-                var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("All", "Event");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -105,7 +106,7 @@ namespace FinalProject.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
         }
