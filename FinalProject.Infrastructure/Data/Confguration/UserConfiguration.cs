@@ -27,7 +27,7 @@ namespace FinalProject.Infrastructure.Data.Confguration
                 UserName = "guest1",
                 NormalizedUserName = "guest1",
                 Email = "guest1@gmail.com",
-                NormalizedEmail = "guest1@gmail.com"
+                NormalizedEmail = "GUEST1@GMAIL.COM"
             };
 
             user.PasswordHash = hasher.HashPassword(user, "guest12345");
@@ -39,10 +39,10 @@ namespace FinalProject.Infrastructure.Data.Confguration
                 UserName = "guest2",
                 NormalizedUserName = "guest2",
                 Email = "guest2@gmail.com",
-                NormalizedEmail = "guest2@gmail.com"
+                NormalizedEmail = "GUEST2@GMAIL.COM"
             };
 
-            user.PasswordHash = hasher.HashPassword(user, "admin1234");
+            user.PasswordHash = hasher.HashPassword(user, "guest1234");
             users.Add(user);
 
             user = new User()
@@ -51,10 +51,10 @@ namespace FinalProject.Infrastructure.Data.Confguration
                 UserName = "guest3",
                 NormalizedUserName = "guest3",
                 Email = "guest3@gmail.com",
-                NormalizedEmail = "guest3@gmail.com"
+                NormalizedEmail = "GUEST3@GMAIL.COM"
             };
 
-            user.PasswordHash = hasher.HashPassword(user, "admin123");
+            user.PasswordHash = hasher.HashPassword(user, "guest123");
             users.Add(user);
 
             user = new User()
@@ -63,7 +63,7 @@ namespace FinalProject.Infrastructure.Data.Confguration
                 UserName = "admin1",
                 NormalizedUserName = "admin1",
                 Email = "admin1@gmail.com",
-                NormalizedEmail = "admin1@gmail.com"
+                NormalizedEmail = "ADMIN1@GMAIL.COM"
             };
 
             user.PasswordHash = hasher.HashPassword(user, "admin12345");

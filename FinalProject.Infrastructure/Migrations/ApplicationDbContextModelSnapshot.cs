@@ -118,9 +118,9 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f2dd87ce-43ac-46d6-a01e-6c1e11c14a51"),
+                            Id = new Guid("edf1c1cc-7fc6-46e4-ab75-c1498dbf7f59"),
                             CategoryId = 1,
-                            Date = new DateTime(2022, 11, 11, 23, 1, 38, 156, DateTimeKind.Local).AddTicks(1206),
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(267),
                             Description = "Sunami EP promo live, be there. ",
                             EventOrganiser = "REAL BAY SH*T",
                             ImageUrl = "https://f4.bcbits.com/img/a0705911045_10.jpg",
@@ -132,9 +132,9 @@ namespace FinalProject.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("05a0ff55-332f-4048-9378-0e4c9b614e2b"),
+                            Id = new Guid("86daddbb-db78-4535-a1db-e2c41b504161"),
                             CategoryId = 2,
-                            Date = new DateTime(2022, 11, 11, 23, 1, 38, 156, DateTimeKind.Local).AddTicks(1257),
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(318),
                             Description = "The puppets show is in town, bring your kids for a fun spectacle.",
                             EventOrganiser = "Sofia Theatre",
                             ImageUrl = "http://theatre.art.bg/img/photos/BIG14008272141zabokyt%20(1).jpg",
@@ -146,9 +146,9 @@ namespace FinalProject.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("184862cb-2647-4945-9556-43ea99436df2"),
+                            Id = new Guid("a56797ac-08ad-441d-af7b-b12881ee5b18"),
                             CategoryId = 3,
-                            Date = new DateTime(2022, 11, 11, 23, 1, 38, 156, DateTimeKind.Local).AddTicks(1264),
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(324),
                             Description = "The premiere of the new Batman coming to this fall.",
                             EventOrganiser = "Matt Reeves",
                             ImageUrl = "https://m.media-amazon.com/images/M/MV5BMDdmMTBiNTYtMDIzNi00NGVlLWIzMDYtZTk3MTQ3NGQxZGEwXkEyXkFqcGdeQXVyMzMwOTU5MDk@._V1_.jpg",
@@ -160,9 +160,9 @@ namespace FinalProject.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("093a12b3-2021-45a2-8f3c-304ef44aa2db"),
+                            Id = new Guid("500c92e0-4910-4ad1-a0f8-42abe7168adc"),
                             CategoryId = 4,
-                            Date = new DateTime(2022, 11, 11, 23, 1, 38, 156, DateTimeKind.Local).AddTicks(1275),
+                            Date = new DateTime(2022, 11, 12, 23, 10, 11, 539, DateTimeKind.Local).AddTicks(329),
                             Description = "This is a charity even for the Make-a-wish foundation hosted by JPMorgan.",
                             EventOrganiser = "JPMorgan",
                             ImageUrl = "https://mma.prnewswire.com/media/444000/Make_A_Wish_Logo.jpg?p=twitter",
@@ -270,15 +270,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "9544756e-d3c1-4965-bf8d-8eb7ecaabf9c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e4038bce-b830-4d21-ba4e-4442541236b2",
+                            ConcurrencyStamp = "86816d81-3c04-401a-9250-29f5efe292f5",
                             Email = "guest1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "guest1@gmail.com",
+                            NormalizedEmail = "GUEST1@GMAIL.COM",
                             NormalizedUserName = "guest1",
-                            PasswordHash = "AQAAAAEAACcQAAAAENayYFvnsmlx26waZsLmAkJPH9tgZpYUpX6/emQC8fFujwBgiq2mpuOju7E8/0So4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFmbmtJbEVVJls42YEIli+m8GMX+bIz11ygx2QITkAl07dp9gt5UGB7X6Ly0lT30Yw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5f8b9a77-e9c8-4d30-84ed-116c15e0af53",
+                            SecurityStamp = "e892746f-7e3e-4e6b-93ad-f3608b22a72f",
                             TwoFactorEnabled = false,
                             UserName = "guest1"
                         },
@@ -286,15 +286,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "ebc5234d-a9cb-4ce0-9b9e-590b2e66d374",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3e76fbf-fc24-48d5-9e12-b10528d41ec2",
+                            ConcurrencyStamp = "5eef8efd-1120-4509-baad-bd7adba82b32",
                             Email = "guest2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "guest2@gmail.com",
+                            NormalizedEmail = "GUEST2@GMAIL.COM",
                             NormalizedUserName = "guest2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG1IYnse7aqN2Lvi7xXapIKluWlsmIQDYyHwnY+U5tsAP8BPQkoPWp7SruGcMpXZ8A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKXNWFQI1XHXYjEuAJwjD+fhkB9zBLgOf1ajLbrl2R55YVtrbuuLuEgtS+TIVmocDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5638030c-0a87-44c2-9d59-6e5dc01067a5",
+                            SecurityStamp = "2f9cf94e-d0a0-4f0d-99cd-9d76f04f0ffb",
                             TwoFactorEnabled = false,
                             UserName = "guest2"
                         },
@@ -302,15 +302,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "88fad1b1-c2c5-4e2b-ba98-16c87d7d01ca",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e09c14be-1036-4d6a-afd3-7e29c9efffac",
+                            ConcurrencyStamp = "38af127b-8da6-43d4-955c-91689c55be6d",
                             Email = "guest3@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "guest3@gmail.com",
+                            NormalizedEmail = "GUEST3@GMAIL.COM",
                             NormalizedUserName = "guest3",
-                            PasswordHash = "AQAAAAEAACcQAAAAECmqvUP10htuGRpJV/f4E4mzTCjWpU2MjLo01yu8B+Bh2QO9ErCehBY4pQmmr+ZVjQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDFZXF/KFNLxoHUdVM0K4LaHwXOrV1rni68092GxA7MqobinRtVMJQu5flH8PVxqCA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "505793c9-ef2a-4124-994a-699b98ca6a19",
+                            SecurityStamp = "cf8e79df-8a34-4ebb-aa10-82bd25bd31e6",
                             TwoFactorEnabled = false,
                             UserName = "guest3"
                         },
@@ -318,15 +318,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "d58dadb8-e031-41e7-875e-da7378709cb5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ebe2735c-fb69-4408-8a74-ef0b5a2096d4",
+                            ConcurrencyStamp = "59710ab7-e448-41a4-b5da-bba744a884b4",
                             Email = "admin1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "admin1@gmail.com",
+                            NormalizedEmail = "ADMIN1@GMAIL.COM",
                             NormalizedUserName = "admin1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDup4CYvMXeJPrWdM1VhJn5meTFwjhVvCOrs7B0rwkPVFCobMk3SsmOjXDjM6CuZtQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOhA1DCuR1OnDTXUchj2aETm17998fzHe34Ga9jcMOt6mWrFbDfYRverC4Y2AOiMuQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2f5620c3-c4b8-4dd0-800b-6c350c4bc5b1",
+                            SecurityStamp = "c10efa23-f0ef-43bf-978a-d604914e7d55",
                             TwoFactorEnabled = false,
                             UserName = "admin1"
                         });

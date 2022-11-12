@@ -1,4 +1,6 @@
+using FinalProject.Contracts;
 using FinalProject.Infrastructure.Data;
+using FinalProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,9 +18,12 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedEmail = false;
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
 
