@@ -53,6 +53,7 @@ namespace FinalProject.Controllers
 
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "guest");
                 return RedirectToAction("Login", "User");
             }
 
