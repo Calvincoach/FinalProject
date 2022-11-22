@@ -1,4 +1,6 @@
-﻿using FinalProject.Core.Models.Event;
+﻿using FinalProject.Contracts;
+using FinalProject.Core.Models.Event;
+using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +9,17 @@ namespace FinalProject.Controllers
     [Authorize]
     public class EventController : Controller
     {
+        private readonly IEventService _eventService;
+
+        public EventController(IEventService eventService)
+        {
+            _eventService = eventService;
+        }
+
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var model = new EventsModel();
+            var model = await _eventService.GetAllEventsAsync();
 
             return View(model);
         }
@@ -31,14 +40,38 @@ namespace FinalProject.Controllers
         //}
 
         [HttpGet]
-        public IActionResult Add() => View();
+        public async Task<IActionResult> Add()
+        {
+            var model = new AddEventViewModel()
+            {
+                Categories = await _eventService.GetCategoriesAsync(),
+                Venues = await _eventService.GetVenuesAsync()
+            };
+
+            return View(model);
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Add(EventModel model)
+        public async Task<IActionResult> Add(AddEventViewModel model)
         {
-            Guid id = Guid.NewGuid();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            return RedirectToAction(nameof(All), new { id });
+            try
+            {
+                await _eventService.AddEventAsync(model);
+                ModelState.Clear();
+                return RedirectToAction(nameof(All), "Event");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Date", e.Message);
+                model.Categories = await _eventService.GetCategoriesAsync();
+                model.Venues = await _eventService.GetVenuesAsync();
+                return View(model);
+            }
         }
 
         //[HttpGet]

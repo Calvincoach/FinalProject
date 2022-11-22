@@ -1,7 +1,9 @@
 ﻿using FinalProject.Contracts;
+using FinalProject.Core.Models.Event;
 using FinalProject.Infrastructure.Data;
 using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace FinalProject.Services
 {
@@ -14,20 +16,39 @@ namespace FinalProject.Services
             _context = context;
         }
 
-        //public async Task AddMovieAsync(AddMovieViewModel model)
-        //{
-        //    var entity = new Movie()
-        //    {
-        //        Director = model.Director,
-        //        GenreId = model.GenreId,
-        //        ImageUrl = model.ImageUrl,
-        //        Rating = model.Rating,
-        //        Title = model.Title
-        //    };
+        public async Task AddEventAsync(AddEventViewModel model)
+        {
+            var existingEvent = await _context.Events.FirstOrDefaultAsync(e => e.Date == model.Date && e.VenueId == model.VenueId);
+            var venue = await _context.Venues.FirstOrDefaultAsync(v => v.Id == model.VenueId);
+            if (existingEvent is not null)
+            {
+                throw new Exception($"An event already exists for {model.Date} at {venue.Name}");
+            }
+            var eventEntity = new Event()
+            {
+                Id = Guid.NewGuid(),
+                Name = model.Name,
+                EventOrganiser = model.EventOrganiser,
+                ImageUrl = model.ImageUrl,
+                Price = model.Price,
+                Date = model.Date,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                VenueId = model.VenueId
+            };
 
-        //    await context.Movies.AddAsync(entity);
-        //    await context.SaveChangesAsync();
-        //}
+            await _context.Events.AddAsync(eventEntity);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
+        {
+            return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Venue>> GetVenuesAsync()
+        {
+            return await _context.Venues.ToListAsync();
+        }
 
         //public async Task AddMovieToCollectionAsync(int movieId, string userId)
         //{
@@ -79,6 +100,7 @@ namespace FinalProject.Services
                     Category = e?.Category?.Name
                 });
         }
+
 
         //public async Task<IEnumerable<Genre>> GetGenresAsync()
         //{
