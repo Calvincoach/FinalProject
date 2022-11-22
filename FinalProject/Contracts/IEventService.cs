@@ -1,4 +1,5 @@
-﻿using FinalProject.Infrastructure.Data;
+﻿using FinalProject.Core.Models.Event;
+using FinalProject.Infrastructure.Data;
 using FinalProject.Models;
 
 namespace FinalProject.Contracts
@@ -7,9 +8,10 @@ namespace FinalProject.Contracts
     {
         Task<IEnumerable<EventViewModel>> GetAllEventsAsync();
 
-        //Task<IEnumerable<Category>> GetGenresAsync();
+        Task AddEventAsync(AddEventViewModel model);
 
-        //Task AddMovieAsync(AddMovieViewModel model);
+        Task<IEnumerable<Venue>> GetVenuesAsync();
+        Task<IEnumerable<Category>> GetCategoriesAsync();
 
         //Task AddMovieToCollectionAsync(int movieId, string userId);
 
