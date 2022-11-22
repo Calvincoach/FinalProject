@@ -1,5 +1,4 @@
-﻿using FinalProject.Contracts;
-using FinalProject.Core.Models.Event;
+﻿using FinalProject.Core.Models.Event;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +7,10 @@ namespace FinalProject.Controllers
     [Authorize]
     public class EventController : Controller
     {
-        private readonly IEventService _eventService;
-
-        public EventController(IEventService eventService)
-        {
-            _eventService = eventService;
-        }
-
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var model = await _eventService.GetAllEventsAsync();
+            var model = new EventsModel();
 
             return View(model);
         }
@@ -38,16 +30,16 @@ namespace FinalProject.Controllers
         //    return View(model);
         //}
 
-        //[HttpGet]
-        //public IActionResult Add() => View();
+        [HttpGet]
+        public IActionResult Add() => View();
 
-        //[HttpPost]
-        //public async Task<IActionResult> Add(EventModel model)
-        //{
-        //    Guid id = Guid.NewGuid();
+        [HttpPost]
+        public async Task<IActionResult> Add(EventModel model)
+        {
+            Guid id = Guid.NewGuid();
 
-        //    return RedirectToAction(nameof(Details), new { id });
-        //}
+            return RedirectToAction(nameof(All), new { id });
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> Edit(Guid id)
