@@ -1,7 +1,61 @@
 ﻿@model EventDetailsModel
 
 @{
-    ViewBag.Title = "Event Details";
+    ViewBag.Title = "House Details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="House Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>Brought to you by: <b>@Model.EventOrganiser</b></p>
+            <p>Located in: <b>@Model.Venue</b></p>
+            <p>
+                Price:
+                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+            </p>
+            <p>Description: @Model.Description</p>
+            <p>Category: <b>@Model.Category</b></p>
+            <p>Date: <b>@Model.Date</b></p>
+
+            <div class="form-inline">
+                @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated && this.User.IsInRole("admin"))
+                {
+                        <form class="input-group-sm" asp-route-eventId="@Model.Id" asp-controller="Event" asp-action="Edit" method="post">
+                        <input type="submit" value="Edit" class="fs-6 btn btn-warning mb-3 p-2" />
+                    </form>
+                    <form class="input-group-sm" asp-controller="Event" asp-action="Delete" method="post">
+                        <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
+                    </form>
+                }
+                else
+                {
+                        <form class="input-group-sm" asp-controller="Event" asp-action="BuyTicket" method="post">
+                                <input type="submit" style="align" value="Buy ticket" class="fs-6 btn btn-warning mb-3 p-2" />
+                        </form>
+                        <form class="input-group-sm" asp-controller="Event" asp-action="Like" method="post">
+                                <input type="submit" value="Like" class="fs-6 btn btn-success mb-3 p-2" />
+                        </form>
+                        <form class="input-group-sm" asp-controller="Event" asp-action="Interested" method="post">
+                                    <input type="submit" value="Interested" class="fs-6 btn btn-success mb-3 p-2" />
+                        </form>
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Reach</h5>
+                    <p class="card-text">Likes:  @Model.Likes</p>
+                    <p class="card-text">Interested: @Model.Interested</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
