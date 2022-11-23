@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<EventViewModel>
 
 @{
-    ViewBag.Title = "Watchlist";
+    ViewBag.Title = "FinalProject";
 }
 
 <div class="text-center row">
@@ -18,9 +18,21 @@
                     <p>Category: @entity.Category</p>
                 </div>
 
-                <form class="input-group-sm" asp-route-entityId="@entity.Id" asp-controller="Event" asp-action="LikeEvent" method="post">
+                    <form class="input-group-sm" asp-route-eventId="@entity.Id" asp-controller="Event" asp-action="Details" method="post">
                     <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
                 </form>
+            @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated && this.User.IsInRole("admin"))
+            {
+                    <div class="col-md-12 bg-light text-center">
+                        <form class="input-group-sm" asp-route-eventId="@entity.Id" asp-controller="Event" asp-action="Edit" method="post">
+                            <input type="submit" value="Edit" class="fs-6 btn btn-warning mb-3 p-2" />
+                        </form>
+                        <form class="input-group-sm" asp-route-eventId="@entity.Id" asp-controller="Event" asp-action="Delete" method="post">
+                            <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
+                        </form>
+                    </div>
+               
+            }
             </div>
     }
 </div>

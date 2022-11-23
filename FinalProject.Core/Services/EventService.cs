@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.Data;
 using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace FinalProject.Services
 {
@@ -16,7 +17,7 @@ namespace FinalProject.Services
             _context = context;
         }
 
-        public async Task AddEventAsync(AddEventViewModel model)
+        public async Task AddEventAsync(EventModel model)
         {
             var existingEvent = await _context.Events.FirstOrDefaultAsync(e => e.Date == model.Date && e.VenueId == model.VenueId);
             var venue = await _context.Venues.FirstOrDefaultAsync(v => v.Id == model.VenueId);
@@ -50,38 +51,6 @@ namespace FinalProject.Services
             return await _context.Venues.ToListAsync();
         }
 
-        //public async Task AddMovieToCollectionAsync(int movieId, string userId)
-        //{
-        //    var user = await context.Users
-        //        .Where(u => u.Id == userId)
-        //        .Include(u => u.UsersMovies)
-        //        .FirstOrDefaultAsync();
-
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("Invalid user ID");
-        //    }
-
-        //    var movie = await context.Movies.FirstOrDefaultAsync(u => u.Id == movieId);
-
-        //    if (movie == null)
-        //    {
-        //        throw new ArgumentException("Invalid Movie ID");
-        //    }
-
-        //    if (!user.UsersMovies.Any(m => m.MovieId == movieId))
-        //    {
-        //        user.UsersMovies.Add(new UserMovie()
-        //        {
-        //            MovieId = movie.Id,
-        //            UserId = user.Id,
-        //            Movie = movie,
-        //            User = user
-        //        });
-
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
 
         public async Task<IEnumerable<EventViewModel>> GetAllEventsAsync()
         {
@@ -101,11 +70,61 @@ namespace FinalProject.Services
                 });
         }
 
+        public async Task DeleteEventAsync(Guid eventId)
+        {
+            var dbEvent = await _context.Events.FindAsync(eventId);
+            if (dbEvent is null)
+            {
+                throw new Exception($"Something went wrong!");
+            }
+            _context.Events.Remove(dbEvent);
+            _context.SaveChanges();
+        }
 
-        //public async Task<IEnumerable<Genre>> GetGenresAsync()
-        //{
-        //    return await context.Genres.ToListAsync();
-        //}
+        public async Task<Event> FindEvent(Guid eventId)
+        {
+            return await _context.Events.FindAsync(eventId);
+        }
+
+        public async Task Edit(Guid eventId, EventModel model)
+        {
+            var entity = await FindEvent(eventId);
+
+            entity.Name = model.Name;
+            entity.EventOrganiser = model.EventOrganiser;
+            entity.ImageUrl = model.ImageUrl;
+            entity.Price = model.Price;
+            entity.Date = model.Date;
+            entity.Description = model.Description;
+            entity.CategoryId = model.CategoryId;
+            entity.VenueId = model.VenueId;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<EventDetailsModel> EventDetails(Event currentEvent)
+        {
+
+            var eventCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == currentEvent.CategoryId);
+            var eventVenue = await _context.Venues.FirstOrDefaultAsync(v => v.Id == currentEvent.VenueId);
+
+            var model = new EventDetailsModel()
+            {
+                Id = currentEvent.Id,
+                Name = currentEvent.Name,
+                EventOrganiser = currentEvent.EventOrganiser,
+                ImageUrl = currentEvent.ImageUrl,
+                Price = currentEvent.Price,
+                Date = currentEvent.Date,
+                Description = currentEvent.Description,
+                Likes = currentEvent.Likes,
+                Interested = currentEvent.Interested,
+                Category = eventCategory.Name,
+                Venue = eventVenue.Name,
+            };
+
+            return model;
+        }
 
         //public async Task<IEnumerable<MovieViewModel>> GetWatchedAsync(string userId)
         //{
@@ -150,6 +169,39 @@ namespace FinalProject.Services
         //    if (movie != null)
         //    {
         //        user.UsersMovies.Remove(movie);
+
+        //        await context.SaveChangesAsync();
+        //    }
+        //}
+
+        //public async Task AddMovieToCollectionAsync(int movieId, string userId)
+        //{
+        //    var user = await context.Users
+        //        .Where(u => u.Id == userId)
+        //        .Include(u => u.UsersMovies)
+        //        .FirstOrDefaultAsync();
+
+        //    if (user == null)
+        //    {
+        //        throw new ArgumentException("Invalid user ID");
+        //    }
+
+        //    var movie = await context.Movies.FirstOrDefaultAsync(u => u.Id == movieId);
+
+        //    if (movie == null)
+        //    {
+        //        throw new ArgumentException("Invalid Movie ID");
+        //    }
+
+        //    if (!user.UsersMovies.Any(m => m.MovieId == movieId))
+        //    {
+        //        user.UsersMovies.Add(new UserMovie()
+        //        {
+        //            MovieId = movie.Id,
+        //            UserId = user.Id,
+        //            Movie = movie,
+        //            User = user
+        //        });
 
         //        await context.SaveChangesAsync();
         //    }

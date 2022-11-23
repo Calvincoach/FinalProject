@@ -8,10 +8,19 @@ namespace FinalProject.Contracts
     {
         Task<IEnumerable<EventViewModel>> GetAllEventsAsync();
 
-        Task AddEventAsync(AddEventViewModel model);
+        Task AddEventAsync(EventModel model);
 
         Task<IEnumerable<Venue>> GetVenuesAsync();
+
         Task<IEnumerable<Category>> GetCategoriesAsync();
+
+        Task DeleteEventAsync(Guid eventId);
+
+        Task<Event> FindEvent(Guid id);
+
+        Task Edit(Guid eventId, EventModel model);
+
+        Task<EventDetailsModel> EventDetails(Event currentEvent);
 
         //Task AddMovieToCollectionAsync(int movieId, string userId);
 
