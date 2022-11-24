@@ -81,14 +81,19 @@ namespace FinalProject.Services
             _context.SaveChanges();
         }
 
-        public async Task<Event> FindEvent(Guid eventId)
+        public async Task<Event> GetEventAsync(Guid eventId)
         {
             return await _context.Events.FindAsync(eventId);
         }
 
+        public async Task<bool> FindEventAsync(Guid eventId)
+        {
+            return await _context.Events.FindAsync(eventId) is null ? false : true ;
+        }
+
         public async Task Edit(Guid eventId, EventModel model)
         {
-            var entity = await FindEvent(eventId);
+            var entity = await GetEventAsync(eventId);
 
             entity.Name = model.Name;
             entity.EventOrganiser = model.EventOrganiser;
@@ -125,7 +130,6 @@ namespace FinalProject.Services
 
             return model;
         }
-
         //public async Task<IEnumerable<MovieViewModel>> GetWatchedAsync(string userId)
         //{
         //    var user = await context.Users
