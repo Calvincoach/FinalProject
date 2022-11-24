@@ -26,22 +26,14 @@ namespace FinalProject.Controllers
             return View(model);
         }
 
-        //public async Task<IActionResult> MyEvent()
-        //{
-        //    var model = new EventsModel();
-
-        //    return View(model);
-        //}
-
         [AllowAnonymous]
         public async Task<IActionResult> Details(Guid eventId)
         {
-            var currentEvent = _eventService.FindEvent(eventId).Result;
-            if (currentEvent is null)
+            if (await _eventService.FindEventAsync(eventId) == false)
             {
                 return RedirectToAction(nameof(All));
             }
-
+            var currentEvent = await _eventService.GetEventAsync(eventId);
             var model = await _eventService.EventDetails(currentEvent);
 
             return View(model);
@@ -82,34 +74,36 @@ namespace FinalProject.Controllers
             }
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(Guid eventId)
-        //{
-        //    //var currentEvent = _eventService.FindEvent(eventId).Result;
-        //    //if (currentEvent is null)
-        //    //{
-        //    //    return RedirectToAction(nameof(All));
-        //    //}
-        //    //var eventCategory = _eventService.GetCategoriesAsync().Result.FirstOrDefault(c => c.Id == currentEvent.CategoryId).Name;
-        //    //var eventVenue = _eventService.GetVenuesAsync().Result.FirstOrDefault(v => v.Id == currentEvent.VenueId).Name;
-        //    //var model = new EventModel()
-        //    //{
-        //    //    Id = currentEvent.Id,
-        //    //    Name = currentEvent.Name,
-        //    //    EventOrganiser = currentEvent.EventOrganiser,
-        //    //    ImageUrl = currentEvent.ImageUrl,
-        //    //    Price = currentEvent.Price,
-        //    //    Date = currentEvent.Date,
-        //    //    Description = currentEvent.Description,
-        //    //    Likes = currentEvent.Likes,
-        //    //    Interested = currentEvent.Interested,
-        //    //    Category = eventCategory,
-        //    //    Venue = eventVenue,
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid eventId)
+        {
+            if (await _eventService.FindEventAsync(eventId) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
 
-        //    //};
+            var existingEvent = await _eventService.GetEventAsync(eventId);
 
-        //    //return View(model);
-        //}
+            var model = new EventModel()
+            {
+                Id = existingEvent.Id,
+                Name = existingEvent.Name,
+                EventOrganiser = existingEvent.EventOrganiser,
+                ImageUrl = existingEvent.ImageUrl,
+                Price = existingEvent.Price,
+                Date = existingEvent.Date,
+                Description = existingEvent.Description,
+                Likes = existingEvent.Likes,
+                Interested = existingEvent.Interested,
+                CategoryId = existingEvent.CategoryId,
+                VenueId = existingEvent.VenueId,
+                Categories = await _eventService.GetCategoriesAsync(),
+                Venues = await _eventService.GetVenuesAsync()
+
+            };
+
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Edit(Guid eventId, EventModel model)
@@ -118,21 +112,18 @@ namespace FinalProject.Controllers
             //{
             //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             //}
-            var existingEvent = _eventService.FindEvent(model.Id).Result;
-            if (existingEvent is null)
+            if (await _eventService.FindEventAsync(model.Id) == false)
             {
                 ModelState.AddModelError("", "Event doesn't exist");
                 return View(model);
             }
             if (!ModelState.IsValid)
             {
-                model.Categories = await _eventService.GetCategoriesAsync();
-                model.Venues = await _eventService.GetVenuesAsync();
                 return View(model);
             }
             await _eventService.Edit(model.Id, model);
 
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction(nameof(Details), new { eventId });
         }
 
         [HttpPost]

@@ -16,7 +16,9 @@ namespace FinalProject.Contracts
 
         Task DeleteEventAsync(Guid eventId);
 
-        Task<Event> FindEvent(Guid id);
+        Task<bool> FindEventAsync(Guid eventId);
+
+        Task<Event> GetEventAsync(Guid eventId);
 
         Task Edit(Guid eventId, EventModel model);
 

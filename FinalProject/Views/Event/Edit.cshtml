@@ -1,7 +1,7 @@
 ﻿@model EventModel
 
 @{
-    ViewBag.Title = "Add event";
+    ViewBag.Title = "Edit event";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -10,58 +10,59 @@
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
-            <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label">Name</label>
-                <input asp-for="@Model.Name" class="form-control" aria-required="true" value="@Model.Name"/>
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.EventOrganiser" class="form-label">Event Organiser</label>
-                <input asp-for="@Model.EventOrganiser" class="form-control" aria-required="true" value="@Model.EventOrganiser"/>
-                <span asp-validation-for="EventOrganiser" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="EventOrganiser">Event Organiser</label>
+                <input asp-for="EventOrganiser" class="form-control">
+                <span asp-validation-for="EventOrganiser" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label">Image URL</label>
-                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" value="@Model.ImageUrl"/>
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="ImageUrl">Image URL</label>
+                <input asp-for="ImageUrl" class="form-control">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Price" class="form-label">Price</label>
-                <input asp-for="@Model.Price" class="form-control" value="@Model.Price" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control">
+                <span asp-validation-for="Price" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Date" class="form-label">Date and Time</label>
-                <input asp-for="@Model.Date" class="form-control" value="@Model.Date" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Date" class="form-label">Date and Time</label>
+                <input asp-for="Date" class="form-control" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                <span asp-validation-for="Date" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label">Description</label>
-                <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5">"@Model.Description"</textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.CategoryId" class="form-label">Category</label>
-                <select asp-for="@Model.CategoryId" class="form-control">
-                    @foreach (var genre in Model.Categories)
+            <div class="form-group">
+                <label asp-for="CategoryId">Categories</label>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var category in Model.Categories)
                     {
-                                <option value="@genre.Id">@genre.Name</option>
+                            <option value="@category.Id">@category.Name</option>
                     }
                 </select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <span asp-validation-for="CategoryId" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.VenueId" class="form-label">Venue</label>
-                <select asp-for="@Model.VenueId" class="form-control">
-                    @foreach (var genre in Model.Venues)
+            <div class="form-group">
+                <label asp-for="VenueId">Venues</label>
+                <select asp-for="VenueId" class="form-control">
+                    @foreach (var venue in Model.Venues)
                     {
-                                    <option value="@genre.Id">@genre.Name</option>
+                             <option value="@venue.Id">@venue.Name</option>
                     }
                 </select>
-                <span asp-validation-for="VenueId" class="text-danger"></span>
+                <span asp-validation-for="VenueId" class="small text-danger"></span>
             </div>
-            <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Add" />
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
             </div>
         </form>
     </div>
