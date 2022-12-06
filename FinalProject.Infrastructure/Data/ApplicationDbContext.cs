@@ -17,8 +17,6 @@ namespace FinalProject.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
-
             builder.Entity<UserEvent>()
                 .HasKey(x => new { x.UserId, x.EventId });
 

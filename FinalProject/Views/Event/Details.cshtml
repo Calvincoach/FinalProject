@@ -1,7 +1,7 @@
 ﻿@model EventDetailsModel
 
 @{
-    ViewBag.Title = "House Details";
+    ViewBag.Title = "Event details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -38,23 +38,19 @@
                         </form>
                     </div>
                 }
-                else
+                else if (this.User?.Identity != null && this.User.Identity.IsAuthenticated && this.User.IsInRole("guest"))
                 {
-                        <a class="input-group-sm" asp-controller="Event" asp-action="BuyTicket" method="post">
-                                <input type="submit" style="align" value="Buy ticket" class="fs-6 btn btn-warning mb-3 p-2" />
+                        <a class="input-group-sm" asp-route-eventId="@Model.Id" asp-controller="Ticket" asp-action="ReserveTicket">
+                            <input type="submit" value="Reserve ticket" class="fs-6 btn btn-warning mb-3 p-2" />
                         </a>
-                        <a class="input-group-sm" asp-controller="Event" asp-action="Like" method="post">
-                                <input type="submit" value="Like" class="fs-6 btn btn-success mb-3 p-2" />
-                        </a>
-                        <a class="input-group-sm" asp-controller="Event" asp-action="Interested" method="post">
-                                    <input type="submit" value="Interested" class="fs-6 btn btn-success mb-3 p-2" />
-                        </a>
+                        <form class="input-group-sm" asp-controller="Event" asp-action="Interested" asp-route-eventId="@Model.Id">
+                            <input type="submit" value="Interested" class="fs-6 btn btn-success mb-3 p-2" />
+                        </form>
                 }
             </div>
             <p></p>
                 <div class="text-left">
                     <h5 class="card-title">Reach</h5>
-                    <p class="card-text">Likes:  @Model.Likes</p>
                     <p class="card-text">Interested: @Model.Interested</p>
                 </div>
         </div>

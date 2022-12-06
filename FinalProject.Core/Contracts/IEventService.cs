@@ -24,10 +24,12 @@ namespace FinalProject.Contracts
 
         Task<EventDetailsModel> EventDetails(Event currentEvent);
 
-        //Task AddMovieToCollectionAsync(int movieId, string userId);
+        Task Like(Guid eventId);
 
-        //Task<IEnumerable<MovieViewModel>> GetWatchedAsync(string userId);
+        Task AddEventToCollectionAsync(Guid eventId, string userId);
 
-        //Task RemoveMovieFromCollectionAsync(int movieId, string userId);
+        Task<IEnumerable<EventViewModel>> GetInterestedEventsAsync(string userId);
+
+        Task RemoveInterestedEventsAsync(Guid eventId, string userId);
     }
 }

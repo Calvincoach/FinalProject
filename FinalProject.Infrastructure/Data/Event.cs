@@ -49,6 +49,6 @@ namespace FinalProject.Infrastructure.Data
         [ForeignKey(nameof(VenueId))]
         public Venue Venue { get; set; } = null!;
 
-        public List<UserEvent> UserEvents { get; set; } = new List<UserEvent>();    
+        public List<UserEvent> UserEvents { get; set; } = new List<UserEvent>();
     }
 }

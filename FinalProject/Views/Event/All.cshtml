@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<EventViewModel>
 
 @{
-    ViewBag.Title = "FinalProject";
+    ViewBag.Title = "All events";
 }
 
 <div class="text-center row">
@@ -13,13 +13,13 @@
                 <div class="card-body">
 
                     <h5 class="card-title mt-1">@entity.Name</h5>
-                    <p class="mb-0">Organiser: @entity.EventOrganiser
-                        <p class="mb-0">Likes: @entity.Likes</p>
+                    <p class="mb-0">Organiser: @entity.EventOrganiser</p>
+                    <p class="mb-0">Interested: @(entity.Interested)</p>
                     <p>Category: @entity.Category</p>
                 </div>
 
                     <a class="input-group-sm" asp-route-eventId="@entity.Id" asp-controller="Event" asp-action="Details">
-                    <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
+                    <input type="submit" value="Details" class="fs-6 btn btn-info mb-3 p-2" />
                 </a>
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated && this.User.IsInRole("admin"))
             {
@@ -29,10 +29,19 @@
                         </a>
                         <form asp-controller="Event" asp-action="Delete" asp-route-eventId="@entity.Id" 
                             onclick="return confirm('Are you sure you want to delete this?')">
-                                    <button type="submit" class="fs-6 btn btn-danger mb-3 p-2">Delete<i class="fas fa-trash-alt text-white"></i></button>
+                            <button type="submit" class="fs-6 btn btn-danger mb-3 p-2">Delete<i class="fas fa-trash-alt text-white"></i></button>
                         </form>
                     </div>
                
+            }
+            else if (this.User?.Identity != null && this.User.Identity.IsAuthenticated && this.User.IsInRole("guest"))
+            {
+                    <a class="input-group-sm" asp-route-eventId="@entity.Id" asp-controller="Ticket" asp-action="ReserveTicket">
+                        <input type="submit" value="Reserve ticket" class="fs-6 btn btn-warning mb-3 p-2" />
+                    </a>
+                    <form class="input-group-sm" asp-controller="Event" asp-action="Interested" asp-route-eventId="@entity.Id">
+                        <input type="submit" value="Interested" class="fs-6 btn btn-success mb-3 p-2" />
+                    </form>
             }
             </div>
     }
