@@ -10,7 +10,7 @@
 
         public string ImageUrl { get; set; }
 
-        public int Likes { get; set; }
+        public int Interested { get; set; }
 
         public string? Category { get; set; }
     }

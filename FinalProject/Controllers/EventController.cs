@@ -4,7 +4,10 @@ using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Net;
 using System.Net.WebSockets;
+using System.Security.Claims;
+using static Humanizer.In;
 
 namespace FinalProject.Controllers
 {
@@ -79,6 +82,7 @@ namespace FinalProject.Controllers
         {
             if (await _eventService.FindEventAsync(eventId) == false)
             {
+                ModelState.AddModelError("", "Event doesn't exist");
                 return RedirectToAction(nameof(All));
             }
 
@@ -112,11 +116,6 @@ namespace FinalProject.Controllers
             //{
             //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             //}
-            if (await _eventService.FindEventAsync(model.Id) == false)
-            {
-                ModelState.AddModelError("", "Event doesn't exist");
-                return View(model);
-            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -141,5 +140,40 @@ namespace FinalProject.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        [HttpPost]
+        public async Task <IActionResult> Interested(Guid eventId)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                await _eventService.AddEventToCollectionAsync(eventId, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NotInterested(Guid eventId)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _eventService.RemoveInterestedEventsAsync(eventId, userId);
+
+            return RedirectToAction(nameof(MyEvents));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyEvents()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var model = await _eventService.GetInterestedEventsAsync(userId);
+
+            return View("MyEvents", model);
+        }
+
     }
 }

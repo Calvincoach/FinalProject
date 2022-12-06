@@ -65,7 +65,7 @@ namespace FinalProject.Services
                     Name = e.Name,
                     EventOrganiser = e.EventOrganiser,
                     ImageUrl = e.ImageUrl,
-                    Likes = e.Likes,
+                    Interested = e.Interested,
                     Category = e?.Category?.Name
                 });
         }
@@ -122,93 +122,104 @@ namespace FinalProject.Services
                 Price = currentEvent.Price,
                 Date = currentEvent.Date,
                 Description = currentEvent.Description,
-                Likes = currentEvent.Likes,
                 Interested = currentEvent.Interested,
                 Category = eventCategory.Name,
-                Venue = eventVenue.Name,
+                Venue = eventVenue.Name
             };
 
             return model;
         }
-        //public async Task<IEnumerable<MovieViewModel>> GetWatchedAsync(string userId)
-        //{
-        //    var user = await context.Users
-        //        .Where(u => u.Id == userId)
-        //        .Include(u => u.UsersMovies)
-        //        .ThenInclude(um => um.Movie)
-        //        .ThenInclude(m => m.Genre)
-        //        .FirstOrDefaultAsync();
 
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("Invalid user ID");
-        //    }
+        public async Task Like(Guid eventId)
+        {
+            var eventToLike = GetEventAsync(eventId).Result;
+            eventToLike.Likes++;
 
-        //    return user.UsersMovies
-        //        .Select(m => new MovieViewModel()
-        //        {
-        //            Director = m.Movie.Director,
-        //            Genre = m.Movie.Genre?.Name,
-        //            Id = m.MovieId,
-        //            ImageUrl = m.Movie.ImageUrl,
-        //            Title = m.Movie.Title,
-        //            Rating = m.Movie.Rating,
-        //        });
-        //}
+            await _context.SaveChangesAsync();
+        }
 
-        //public async Task RemoveMovieFromCollectionAsync(int movieId, string userId)
-        //{
-        //    var user = await context.Users
-        //        .Where(u => u.Id == userId)
-        //        .Include(u => u.UsersMovies)
-        //        .FirstOrDefaultAsync();
+        public async Task AddEventToCollectionAsync(Guid eventId, string userId)
+        {
+            var user = await _context.Users
+                .Where(u => u.Id == userId)
+                .Include(u => u.UsersEvents)
+                .FirstOrDefaultAsync();
 
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("Invalid user ID");
-        //    }
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
 
-        //    var movie = user.UsersMovies.FirstOrDefault(m => m.MovieId == movieId);
+            var existingEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == eventId);
 
-        //    if (movie != null)
-        //    {
-        //        user.UsersMovies.Remove(movie);
+            if (existingEvent == null)
+            {
+                throw new ArgumentException("Invalid Movie ID");
+            }
 
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
+            if (!user.UsersEvents.Any(e => e.EventId == eventId))
+            {
+                existingEvent.Interested++;
 
-        //public async Task AddMovieToCollectionAsync(int movieId, string userId)
-        //{
-        //    var user = await context.Users
-        //        .Where(u => u.Id == userId)
-        //        .Include(u => u.UsersMovies)
-        //        .FirstOrDefaultAsync();
+                user.UsersEvents.Add(new UserEvent()
+                {
+                    EventId = existingEvent.Id,
+                    UserId = user.Id,
+                    Event = existingEvent,
+                    User = user
+                });
+                
 
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("Invalid user ID");
-        //    }
+                await _context.SaveChangesAsync();
+            }
+        }
 
-        //    var movie = await context.Movies.FirstOrDefaultAsync(u => u.Id == movieId);
+        public async Task<IEnumerable<EventViewModel>> GetInterestedEventsAsync(string userId)
+        {
+            var user = await _context.Users
+                .Where(u => u.Id == userId)
+                .Include(u => u.UsersEvents)
+                .ThenInclude(ue => ue.Event)
+                .ThenInclude(e => e.Category)
+                .FirstOrDefaultAsync();
 
-        //    if (movie == null)
-        //    {
-        //        throw new ArgumentException("Invalid Movie ID");
-        //    }
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
 
-        //    if (!user.UsersMovies.Any(m => m.MovieId == movieId))
-        //    {
-        //        user.UsersMovies.Add(new UserMovie()
-        //        {
-        //            MovieId = movie.Id,
-        //            UserId = user.Id,
-        //            Movie = movie,
-        //            User = user
-        //        });
+            return user.UsersEvents
+                .Select(e => new EventViewModel()
+                {
+                    Id = e.Event.Id,
+                    Name = e.Event.Name,
+                    EventOrganiser = e.Event.EventOrganiser,
+                    ImageUrl = e.Event.ImageUrl,
+                    Interested = e.Event.Interested,
+                    Category = e?.Event.Category?.Name
+                });
+        }
 
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
+        public async Task RemoveInterestedEventsAsync(Guid eventId, string userId)
+        {
+            var user = await _context.Users
+                .Where(u => u.Id == userId)
+                .Include(u => u.UsersEvents)
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var existingEvent = user.UsersEvents.FirstOrDefault(e => e.EventId == eventId);
+
+            if (existingEvent != null)
+            {
+                user.UsersEvents.Remove(existingEvent);
+
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

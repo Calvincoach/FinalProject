@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using FinalProject.Models;
+using FinalProject.Core.Models.LoginRegister;
 
 namespace FinalProject.Controllers
 {

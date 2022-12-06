@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221204215942_FixTicketsFinal")]
+    partial class FixTicketsFinal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,9 +120,9 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2332a08f-326d-47a6-8bc4-58fed5cc4385"),
+                            Id = new Guid("e5d8464b-a40e-4f93-8dcd-f6c914a552dd"),
                             CategoryId = 1,
-                            Date = new DateTime(2022, 12, 6, 22, 15, 2, 236, DateTimeKind.Local).AddTicks(6174),
+                            Date = new DateTime(2022, 12, 4, 23, 59, 42, 369, DateTimeKind.Local).AddTicks(1908),
                             Description = "Sunami EP promo live, be there. ",
                             EventOrganiser = "REAL BAY SH*T",
                             ImageUrl = "https://f4.bcbits.com/img/a0705911045_10.jpg",
@@ -132,9 +134,9 @@ namespace FinalProject.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ade3d297-79d4-425c-9951-97f62b520d99"),
+                            Id = new Guid("e21ba7b7-1cd3-4754-8182-20b0a5768a05"),
                             CategoryId = 2,
-                            Date = new DateTime(2022, 12, 6, 22, 15, 2, 236, DateTimeKind.Local).AddTicks(6218),
+                            Date = new DateTime(2022, 12, 4, 23, 59, 42, 369, DateTimeKind.Local).AddTicks(1971),
                             Description = "The puppets show is in town, bring your kids for a fun spectacle.",
                             EventOrganiser = "Sofia Theatre",
                             ImageUrl = "http://theatre.art.bg/img/photos/BIG14008272141zabokyt%20(1).jpg",
@@ -146,9 +148,9 @@ namespace FinalProject.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7bf277e-20a2-40e4-bd46-f1b1a938e255"),
+                            Id = new Guid("011f7407-8c0e-4025-a42f-677b2c44406c"),
                             CategoryId = 3,
-                            Date = new DateTime(2022, 12, 6, 22, 15, 2, 236, DateTimeKind.Local).AddTicks(6224),
+                            Date = new DateTime(2022, 12, 4, 23, 59, 42, 369, DateTimeKind.Local).AddTicks(1977),
                             Description = "The premiere of the new Batman coming to this fall.",
                             EventOrganiser = "Matt Reeves",
                             ImageUrl = "https://m.media-amazon.com/images/M/MV5BMDdmMTBiNTYtMDIzNi00NGVlLWIzMDYtZTk3MTQ3NGQxZGEwXkEyXkFqcGdeQXVyMzMwOTU5MDk@._V1_.jpg",
@@ -160,9 +162,9 @@ namespace FinalProject.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2312dc49-a8e5-4a4c-b939-4bebe6268acb"),
+                            Id = new Guid("65a29964-3ccc-49ef-85c7-cf772c3459c5"),
                             CategoryId = 4,
-                            Date = new DateTime(2022, 12, 6, 22, 15, 2, 236, DateTimeKind.Local).AddTicks(6230),
+                            Date = new DateTime(2022, 12, 4, 23, 59, 42, 369, DateTimeKind.Local).AddTicks(1983),
                             Description = "This is a charity even for the Make-a-wish foundation hosted by JPMorgan.",
                             EventOrganiser = "JPMorgan",
                             ImageUrl = "https://mma.prnewswire.com/media/444000/Make_A_Wish_Logo.jpg?p=twitter",
@@ -182,9 +184,6 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("EventName")
                         .IsRequired()
@@ -281,15 +280,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "9544756e-d3c1-4965-bf8d-8eb7ecaabf9c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bfe7df97-3660-4e17-b16b-a68bed194eaf",
+                            ConcurrencyStamp = "25c0dda6-520e-4ca8-a4bf-9aac1b426e78",
                             Email = "guest1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST1@GMAIL.COM",
                             NormalizedUserName = "guest1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAQKbw4ZEgzEq4m5AbEUREj9e6sOz3Iq4SG7WwnFFqvzqHMUGUC36t3gD9PYgWlDWg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHM+XOUAMUmq/+77h15aVfQjYOIdWyGwiQjF9G2X3wOfwehcWwnMyzZ53h8kJJWJcA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "55608d60-0b44-4d5d-9905-2f7a212b1be8",
+                            SecurityStamp = "87efd27e-3823-4a6a-ac55-a937055a12dc",
                             TwoFactorEnabled = false,
                             UserName = "guest1"
                         },
@@ -297,15 +296,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "ebc5234d-a9cb-4ce0-9b9e-590b2e66d374",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "943c29a9-8b78-4433-aa99-51c15337653c",
+                            ConcurrencyStamp = "517ec4aa-7852-4e38-9e1e-845a66f250dc",
                             Email = "guest2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST2@GMAIL.COM",
                             NormalizedUserName = "guest2",
-                            PasswordHash = "AQAAAAEAACcQAAAAENsebNUyyGRGb8xgJCxjN5id35LjKiFueSv+nQboFMyNooAN6wCwv4eNd9j/oCO2rg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJGOo7c3DZ1xEqCyA4oLb6Yk/UuN1k2BAzbgvuEb+fXUgNNl5G1HQeZ/2LprLMpGJA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "15250bda-2423-4ef0-9517-57b214ff7fd7",
+                            SecurityStamp = "a0463970-23fc-4e13-a08c-f2a0669c27c8",
                             TwoFactorEnabled = false,
                             UserName = "guest2"
                         },
@@ -313,15 +312,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "88fad1b1-c2c5-4e2b-ba98-16c87d7d01ca",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6764337f-31de-4fe6-8195-536a91b48729",
+                            ConcurrencyStamp = "68b847a1-1005-4077-9d67-8f102ed78f4d",
                             Email = "guest3@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST3@GMAIL.COM",
                             NormalizedUserName = "guest3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEInAXsePaXCAJU+LamdQZ6ItjpnZOj6iIPE1W5WOvlN0uziHqqIOaxGO8uc6uhk2Mw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPbYfnBNLEEU4fNkrUetMpbF5Yi7qn0uS+aSRfX++PYSQxeZIrmUxGG29NrrAwT/FA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2b06660-779c-48ab-a2f9-ad93f283c281",
+                            SecurityStamp = "d0bb0db9-b32d-4dfe-a54a-b2e48b242fe5",
                             TwoFactorEnabled = false,
                             UserName = "guest3"
                         },
@@ -329,15 +328,15 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "d58dadb8-e031-41e7-875e-da7378709cb5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a4a1fd3b-f120-4da2-baf6-56978d791f5f",
+                            ConcurrencyStamp = "9266d6cf-a8b4-4b69-a8c4-0f696aa6f0f9",
                             Email = "admin1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN1@GMAIL.COM",
                             NormalizedUserName = "admin1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEBOXYqSyQ3+98G5OWELxNa+gmS+inCFkFfTT7IEp+FaYO78yjnTngzFRGcu8+htrQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMD1lOy/6JD5MCUP+2O8CkzeaT/5kCt/sd0ukaGspOOwK8EeyM3T1zGPbac9KPAETg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9c0b5766-7459-4328-97af-e95559a61ccf",
+                            SecurityStamp = "9b7a502b-7df8-4e1b-b4be-669e4da6d9b9",
                             TwoFactorEnabled = false,
                             UserName = "admin1"
                         });

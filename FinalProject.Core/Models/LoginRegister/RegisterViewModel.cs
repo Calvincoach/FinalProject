@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinalProject.Models
+namespace FinalProject.Core.Models.LoginRegister
 {
     public class RegisterViewModel
     {
@@ -10,7 +10,7 @@ namespace FinalProject.Models
 
         [Required]
         [EmailAddress]
-        [StringLength (60, MinimumLength = 10)]
+        [StringLength(60, MinimumLength = 10)]
         public string Email { get; set; } = null!;
 
         [Required]

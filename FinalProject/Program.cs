@@ -1,4 +1,6 @@
 using FinalProject.Contracts;
+using FinalProject.Core.Contracts;
+using FinalProject.Core.Services;
 using FinalProject.Infrastructure.Data;
 using FinalProject.Services;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +27,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
 
 var app = builder.Build();
 
