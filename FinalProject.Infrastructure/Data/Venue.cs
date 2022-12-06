@@ -20,9 +20,6 @@ namespace FinalProject.Infrastructure.Data
         public string ImageUrl { get; set; }
 
         [Required]
-        public int Capacity { get; set; }
-
-        [Required]
         [StringLength(85)]
         public string City { get; set; } = null!;
     }

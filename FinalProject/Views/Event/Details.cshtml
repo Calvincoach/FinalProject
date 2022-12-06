@@ -16,8 +16,11 @@
         <div class="card col-8 border-0">
             <p style="font-size:25px;"><u>@Model.Name</u></p>
             <p>Brought to you by: <b>@Model.EventOrganiser</b></p>
-            <p>Located in: <b>@Model.Venue</b></p>
-            <p>
+            <p>Venue:
+            <a class="link-dark" asp-controller="Venue" asp-action="AllVenues">
+                    @Model.Venue
+            </a>
+            </p>
                 Price:
                 <b>@String.Format("{0:f2}", Model.Price) BGN</b>
             </p>

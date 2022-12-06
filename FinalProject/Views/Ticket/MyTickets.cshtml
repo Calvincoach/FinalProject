@@ -11,12 +11,12 @@
         <div class="card col-4" style="width: 20rem;">
             <img class="card-img-top" style="width: 18rem;"src="@ticket.ImageUrl" alt="Event Image">
             <div class="card-body">
-                <a class="input-group-sm" asp-route-eventId="@ticket.EventId" asp-controller="Event" asp-action="Details">
-                    <h5 class="card-title mt-1">@ticket.EventName</h5>
+                    <a class="link-dark" asp-route-eventId="@ticket.EventId" asp-controller="Event" asp-action="Details">
+                    <h5 class="card-title" >@ticket.EventName</h5>
                 </a>
                 <p class="mb-0">Ticket Holder: @ticket.TicketHolder</p>
-                <p class="mb-0">Ticket reference: @ticket.TicketReference</p>
-                <p class="mb-0">Ticket reference: @ticket.Date</p>
+                <p class="mb-0">Ticket reference: <b>@ticket.TicketReference</b></p>
+                <p class="mb-0">Date: @ticket.Date</p>
             </div>
         </div>
     }

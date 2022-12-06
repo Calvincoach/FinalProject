@@ -1,0 +1,20 @@
+﻿@using FinalProject.Core.Models.Venue
+@model IEnumerable<VenueViewModel>
+
+@{
+    ViewBag.Title = "All events";
+}
+
+<div class="text-center row">
+    @foreach (var venue in Model)
+    {
+                <div class="card col-4" style="width: 20rem;">
+                    <img class="card-img-top" style="width: 18rem;"
+             src="@venue.ImageUrl" alt="Event Image">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1">@venue.Name</h5>
+                        <p class="mb-0">City: @venue.City</p>
+                    </div>
+                </div>
+    }
+</div>

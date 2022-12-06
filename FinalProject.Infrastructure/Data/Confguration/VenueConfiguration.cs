@@ -24,7 +24,6 @@ namespace FinalProject.Infrastructure.Data.Confguration
                     Id = Guid.Parse("b83b35c8-1c9d-4404-a7c9-a76cc9617719"),
                     Name = "Hale3",
                     ImageUrl="",
-                    Capacity=200,
                     City = "Varna"
                 },
                 new Venue()
@@ -32,7 +31,6 @@ namespace FinalProject.Infrastructure.Data.Confguration
                     Id = Guid.Parse("4611cec5-9233-4c0c-9201-529b9af6235d"),
                     Name = "Sofia Puppet Theatre",
                     ImageUrl="",
-                    Capacity=500,
                     City = "Sofia"
                 },
                 new Venue()
@@ -40,7 +38,6 @@ namespace FinalProject.Infrastructure.Data.Confguration
                     Id = Guid.Parse("b80248ba-4607-498e-bbd5-afd4f7221979"),
                     Name = "CinemaCity",
                     ImageUrl="",
-                    Capacity=1500,
                     City = "Plovdiv"
                 },
                 new Venue()
@@ -48,7 +45,6 @@ namespace FinalProject.Infrastructure.Data.Confguration
                     Id = Guid.Parse("197ee165-a4da-46d7-893a-f1cefc6ddc96"),
                     Name = "Culture Home Burgas",
                     ImageUrl="",
-                    Capacity=5000,
                     City = "Burgas"
                 },
             };

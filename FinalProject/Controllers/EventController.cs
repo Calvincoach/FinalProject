@@ -42,6 +42,7 @@ namespace FinalProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -54,6 +55,7 @@ namespace FinalProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Add(EventModel model)
         {
@@ -77,6 +79,7 @@ namespace FinalProject.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid eventId)
         {
@@ -97,7 +100,6 @@ namespace FinalProject.Controllers
                 Price = existingEvent.Price,
                 Date = existingEvent.Date,
                 Description = existingEvent.Description,
-                Likes = existingEvent.Likes,
                 Interested = existingEvent.Interested,
                 CategoryId = existingEvent.CategoryId,
                 VenueId = existingEvent.VenueId,
@@ -109,6 +111,7 @@ namespace FinalProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(Guid eventId, EventModel model)
         {
@@ -125,6 +128,7 @@ namespace FinalProject.Controllers
             return RedirectToAction(nameof(Details), new { eventId });
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(Guid eventId)
         {
@@ -141,6 +145,7 @@ namespace FinalProject.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "guest")]
         [HttpPost]
         public async Task <IActionResult> Interested(Guid eventId)
         {
@@ -157,6 +162,7 @@ namespace FinalProject.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "guest")]
         [HttpPost]
         public async Task<IActionResult> NotInterested(Guid eventId)
         {
@@ -166,6 +172,7 @@ namespace FinalProject.Controllers
             return RedirectToAction(nameof(MyEvents));
         }
 
+        [Authorize(Roles = "guest")]
         [HttpGet]
         public async Task<IActionResult> MyEvents()
         {
