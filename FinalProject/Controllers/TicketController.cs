@@ -20,7 +20,7 @@ namespace FinalProject.Controllers
             _eventService = eventService;
         }
 
-
+        [Authorize(Roles = "guest")]
         [HttpGet]
         public async Task<IActionResult> ReserveTicket(Guid eventId)
         {
@@ -49,6 +49,7 @@ namespace FinalProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "guest")]
         [HttpPost]
         public async Task<IActionResult> ReserveTicket(Guid eventId, TicketModel model)
         {
@@ -70,6 +71,7 @@ namespace FinalProject.Controllers
             return RedirectToAction("All", "Event");
         }
 
+        [Authorize(Roles = "guest")]
         [HttpGet]
         public async Task<IActionResult> MyTickets()
         {

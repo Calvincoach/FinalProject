@@ -34,9 +34,6 @@ namespace FinalProject.Infrastructure.Data
         [Required]
         [StringLength(5000)]
         public string Description { get; set; } = null!;
-
-        public int Likes { get; set; }
-
         public int Interested { get; set; }
 
         public int? CategoryId { get; set; }

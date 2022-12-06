@@ -24,8 +24,6 @@ namespace FinalProject.Contracts
 
         Task<EventDetailsModel> EventDetails(Event currentEvent);
 
-        Task Like(Guid eventId);
-
         Task AddEventToCollectionAsync(Guid eventId, string userId);
 
         Task<IEnumerable<EventViewModel>> GetInterestedEventsAsync(string userId);

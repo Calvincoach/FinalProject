@@ -130,14 +130,6 @@ namespace FinalProject.Services
             return model;
         }
 
-        public async Task Like(Guid eventId)
-        {
-            var eventToLike = GetEventAsync(eventId).Result;
-            eventToLike.Likes++;
-
-            await _context.SaveChangesAsync();
-        }
-
         public async Task AddEventToCollectionAsync(Guid eventId, string userId)
         {
             var user = await _context.Users
