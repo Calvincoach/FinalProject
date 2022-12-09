@@ -60,7 +60,7 @@ namespace FinalProject.Controllers
                     return View(model);
                 }
                 var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-                await _ticketService.ReserveTicket(model, userId, eventId);
+                await _ticketService.ReserveTicketAsync(model, userId, eventId);
             }
             catch (Exception e)
             {
@@ -76,7 +76,7 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> MyTickets()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            var model = await _ticketService.GetUserTickets(userId);
+            var model = await _ticketService.GetUserTicketsAsync(userId);
 
             return View("MyTickets", model);
         }

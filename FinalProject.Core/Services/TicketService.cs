@@ -16,10 +16,15 @@ namespace FinalProject.Core.Services
             _context = context;
         }
 
-        public async Task ReserveTicket(TicketModel model, string userId, Guid eventId)
+        public async Task ReserveTicketAsync(TicketModel model, string userId, Guid eventId)
         {
-            var existingTicket = await _context.Tickets.FirstOrDefaultAsync(t => t.TicketHolder == model.TicketHolder);
+            var existingTicket = await _context.Tickets.FirstOrDefaultAsync(t => t.TicketHolder == model.TicketHolder && t.EventId == eventId);
+            var existingEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == eventId);
 
+            if (existingEvent is null)
+            {
+                throw new Exception("Event doesn't exist");
+            }
             if (existingTicket is not null)
             {
                 throw new Exception($"A ticket with ticket holder: {model.TicketHolder} already exists");
@@ -38,16 +43,16 @@ namespace FinalProject.Core.Services
             };
 
             await _context.Tickets.AddAsync(newTicket);
-            await AddTicketToCollection(userId, newTicket);
+            await AddTicketToUserAsync(userId, newTicket);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddTicketToCollection(string userId, Ticket newTicket)
+        public async Task AddTicketToUserAsync(string userId, Ticket newTicket)
         {
             
             var user = await _context.Users
                 .Where(u => u.Id == userId)
-                .Include(u => u.UsersEvents)
+                .Include(u => u.UserTickets)
                 .FirstOrDefaultAsync();
 
             if (user == null)
@@ -66,7 +71,7 @@ namespace FinalProject.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TicketViewModel>> GetUserTickets(string userId)
+        public async Task<IEnumerable<TicketViewModel>> GetUserTicketsAsync(string userId)
         {
             var user = await _context.Users
                .Where(u => u.Id == userId)

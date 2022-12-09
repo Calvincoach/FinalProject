@@ -1,13 +1,8 @@
 ﻿using FinalProject.Contracts;
-using FinalProject.Core.Models.Event;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Net;
-using System.Net.WebSockets;
 using System.Security.Claims;
-using static Humanizer.In;
 
 namespace FinalProject.Controllers
 {
@@ -37,7 +32,7 @@ namespace FinalProject.Controllers
                 return RedirectToAction(nameof(All));
             }
             var currentEvent = await _eventService.GetEventAsync(eventId);
-            var model = await _eventService.EventDetails(currentEvent);
+            var model = await _eventService.EventDetailsAsync(currentEvent);
 
             return View(model);
         }
@@ -115,15 +110,11 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Guid eventId, EventModel model)
         {
-            //if (id != model.Id)
-            //{
-            //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-            //}
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            await _eventService.Edit(model.Id, model);
+            await _eventService.EditAsync(model.Id, model);
 
             return RedirectToAction(nameof(Details), new { eventId });
         }
@@ -166,7 +157,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> NotInterested(Guid eventId)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await _eventService.RemoveInterestedEventsAsync(eventId, userId);
 
             return RedirectToAction(nameof(MyEvents));
@@ -176,7 +167,7 @@ namespace FinalProject.Controllers
         [HttpGet]
         public async Task<IActionResult> MyEvents()
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var model = await _eventService.GetInterestedEventsAsync(userId);
 
             return View("MyEvents", model);
