@@ -5,9 +5,16 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject", "FinalProject\FinalProject.csproj", "{53EC72E6-AB1C-4D3A-9AD1-237F795AEDB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject.Infrastructure", "FinalProject.Infrastructure\FinalProject.Infrastructure.csproj", "{C72C179F-ECEC-4F2C-89B7-A00D1CB7E586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject.Infrastructure", "FinalProject.Infrastructure\FinalProject.Infrastructure.csproj", "{C72C179F-ECEC-4F2C-89B7-A00D1CB7E586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject.Core", "FinalProject.Core\FinalProject.Core.csproj", "{98B841E8-27B7-4AA6-B54F-E12436E23AD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject.Core", "FinalProject.Core\FinalProject.Core.csproj", "{98B841E8-27B7-4AA6-B54F-E12436E23AD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject.Tests", "FinalProject.Tests\FinalProject.Tests.csproj", "{6EF52DD1-345D-4327-A868-6FD8C97AED26}"
+	ProjectSection(ProjectDependencies) = postProject
+		{53EC72E6-AB1C-4D3A-9AD1-237F795AEDB6} = {53EC72E6-AB1C-4D3A-9AD1-237F795AEDB6}
+		{98B841E8-27B7-4AA6-B54F-E12436E23AD5} = {98B841E8-27B7-4AA6-B54F-E12436E23AD5}
+		{C72C179F-ECEC-4F2C-89B7-A00D1CB7E586} = {C72C179F-ECEC-4F2C-89B7-A00D1CB7E586}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +34,10 @@ Global
 		{98B841E8-27B7-4AA6-B54F-E12436E23AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98B841E8-27B7-4AA6-B54F-E12436E23AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98B841E8-27B7-4AA6-B54F-E12436E23AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF52DD1-345D-4327-A868-6FD8C97AED26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF52DD1-345D-4327-A868-6FD8C97AED26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF52DD1-345D-4327-A868-6FD8C97AED26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF52DD1-345D-4327-A868-6FD8C97AED26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -91,7 +91,7 @@ namespace FinalProject.Services
             return await _context.Events.FindAsync(eventId) is null ? false : true ;
         }
 
-        public async Task Edit(Guid eventId, EventModel model)
+        public async Task EditAsync(Guid eventId, EventModel model)
         {
             var entity = await GetEventAsync(eventId);
 
@@ -107,7 +107,7 @@ namespace FinalProject.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<EventDetailsModel> EventDetails(Event currentEvent)
+        public async Task<EventDetailsModel> EventDetailsAsync(Event currentEvent)
         {
 
             var eventCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == currentEvent.CategoryId);

@@ -20,9 +20,9 @@ namespace FinalProject.Contracts
 
         Task<Event> GetEventAsync(Guid eventId);
 
-        Task Edit(Guid eventId, EventModel model);
+        Task EditAsync(Guid eventId, EventModel model);
 
-        Task<EventDetailsModel> EventDetails(Event currentEvent);
+        Task<EventDetailsModel> EventDetailsAsync(Event currentEvent);
 
         Task AddEventToCollectionAsync(Guid eventId, string userId);
 

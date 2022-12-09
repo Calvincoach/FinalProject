@@ -6,10 +6,10 @@ namespace FinalProject.Core.Contracts
 {
     public interface ITicketService
     {
-        Task ReserveTicket(TicketModel model, string userId, Guid eventId);
+        Task ReserveTicketAsync(TicketModel model, string userId, Guid eventId);
 
-        Task AddTicketToCollection(string userId, Ticket newTicket);
+        Task AddTicketToUserAsync(string userId, Ticket newTicket);
 
-        Task<IEnumerable<TicketViewModel>> GetUserTickets(string userId);
+        Task<IEnumerable<TicketViewModel>> GetUserTicketsAsync(string userId);
     }
 }
