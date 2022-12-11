@@ -146,7 +146,7 @@ namespace FinalProject.Services
 
             if (existingEvent == null)
             {
-                throw new ArgumentException("Invalid Movie ID");
+                throw new ArgumentException("Invalid event ID");
             }
 
             if (!user.UsersEvents.Any(e => e.EventId == eventId))
@@ -208,6 +208,8 @@ namespace FinalProject.Services
 
             if (existingEvent != null)
             {
+                var eventToDecrease = await GetEventAsync(eventId);
+                eventToDecrease.Interested--;
                 user.UsersEvents.Remove(existingEvent);
 
                 await _context.SaveChangesAsync();

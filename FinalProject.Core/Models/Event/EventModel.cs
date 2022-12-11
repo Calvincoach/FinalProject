@@ -25,7 +25,6 @@ namespace FinalProject.Models
         [Required]
         public DateTime Date { get; set; }
 
-        public int Likes { get; set; }
         public int Interested { get; set; }
 
         [Required]

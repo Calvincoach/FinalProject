@@ -11,13 +11,16 @@ namespace FinalProject.Tests.ServiceTests
     public class VenueServiceTest
     {
         private IVenueService? _sut;
-        private Mock<ApplicationDbContext> _contextMock;
+        private ApplicationDbContext? _context;
 
         [TestInitialize]
         public void Setup()
         {
-            _contextMock = new Mock<ApplicationDbContext>();
-            _sut = new VenueService(_contextMock.Object); 
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "FinalProject")
+                .Options;
+            _context = new ApplicationDbContext(options);
+            _sut = new VenueService(_context); 
         }
 
 
