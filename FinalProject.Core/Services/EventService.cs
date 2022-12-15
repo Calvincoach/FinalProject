@@ -23,7 +23,7 @@ namespace FinalProject.Services
             var venue = await _context.Venues.FirstOrDefaultAsync(v => v.Id == model.VenueId);
             if (existingEvent is not null)
             {
-                throw new Exception($"An event already exists for {model.Date} at {venue.Name}");
+                throw new Exception($"An event already exists for {model.Date} at {venue!.Name}");
             }
             var eventEntity = new Event()
             {
@@ -123,8 +123,8 @@ namespace FinalProject.Services
                 Date = currentEvent.Date,
                 Description = currentEvent.Description,
                 Interested = currentEvent.Interested,
-                Category = eventCategory.Name,
-                Venue = eventVenue.Name
+                Category = eventCategory!.Name,
+                Venue = eventVenue!.Name
             };
 
             return model;

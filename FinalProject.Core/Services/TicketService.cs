@@ -84,8 +84,6 @@ namespace FinalProject.Core.Services
                 throw new ArgumentException("Invalid user ID");
             }
 
-            var testTicket = await _context.Tickets.FirstOrDefaultAsync(x => x.Id == Guid.Parse("2DD5B346-8858-4885-8845-E26A5CA7CC25"));
-
             var result = user.UserTickets
                 .Select(t => new TicketViewModel()
                 {

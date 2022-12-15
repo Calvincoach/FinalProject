@@ -93,7 +93,7 @@ namespace FinalProject.Areas.admin.Controllers
             }
             await _eventService.EditAsync(model.Id, model);
 
-            return RedirectToRoute(new { controller = "Event", action = "Details", area = "", id = eventId});
+            return RedirectToAction("All", "Event", new { area = "" });
         }
 
         [HttpPost]
