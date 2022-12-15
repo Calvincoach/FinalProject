@@ -31,7 +31,7 @@
                         @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated && this.User.IsInRole("admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Add">Add event</a>
+                                <a class="nav-link text-dark" asp-area="admin" asp-controller="Event" asp-action="Add">Add event</a>
                             </li>
                         }
                         else if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)

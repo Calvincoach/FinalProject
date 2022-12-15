@@ -1,4 +1,12 @@
-﻿@model EventModel
+﻿@using FinalProject.Models
+@model EventModel
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
+
+@{
+    Layout = "_Layout";
+}
 
 @{
     ViewBag.Title = "Add event";
@@ -45,7 +53,7 @@
                 <select asp-for="@Model.CategoryId" class="form-control">
                     @foreach (var genre in Model.Categories)
                     {
-                            <option value="@genre.Id">@genre.Name</option>
+                                    <option value="@genre.Id">@genre.Name</option>
                     }
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
@@ -55,7 +63,7 @@
                 <select asp-for="@Model.VenueId" class="form-control">
                     @foreach (var genre in Model.Venues)
                     {
-                                <option value="@genre.Id">@genre.Name</option>
+                                        <option value="@genre.Id">@genre.Name</option>
                     }
                 </select>
                 <span asp-validation-for="VenueId" class="text-danger"></span>
@@ -68,5 +76,5 @@
 </div>
 
 @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
+                <partial name="_ValidationScriptsPartial" />
 }

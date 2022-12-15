@@ -56,9 +56,29 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+       name: "areas",
+       pattern: "{area:exists}/{controller=Event}/{action=Delete}/{id?}"
+       );
+
+    endpoints.MapControllerRoute(
+       name: "areas",
+       pattern: "{area:exists}/{controller=Event}/{action=Edit}/{id?}"
+       );
+
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Event}/{action=Add}/{id?}"
+        );
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.MapRazorPages();
+});
+
 
 app.Run();
